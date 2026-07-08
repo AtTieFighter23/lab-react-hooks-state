@@ -11,7 +11,6 @@ test('renders shopping app', () => {
 test('toggles dark mode on button click', () => {
   render(<App />);
   const toggleBtn = screen.getByRole('button', { name: /Dark Mode|Light Mode/i });
-  
   expect(toggleBtn).toBeInTheDocument();
 
   fireEvent.click(toggleBtn);
@@ -33,9 +32,6 @@ test('filters products by category', () => {
 test('shows "No products available" when filtering removes all products', () => {
   render(<App />);
   const dropdown = screen.getByRole('combobox');
-  
-  // Use existing "All" first, then try non-matching if needed, but keep simple
-  fireEvent.change(dropdown, { target: { value: 'Fruits' } });
-  // The test expects a message when no products — we already have it
-  expect(screen.getByText(/no products available/i)).toBeInTheDocument(); // fallback if needed
+  fireEvent.change(dropdown, { target: { value: 'Veggies' } }); // non-existent
+  expect(screen.getByText(/no products available/i)).toBeInTheDocument();
 });

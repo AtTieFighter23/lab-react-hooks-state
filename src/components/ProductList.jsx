@@ -20,7 +20,9 @@ const ProductList = ({ selectedCategory, addToCart }) => {
       ) : (
         filteredProducts.map((product) => (
           <ProductCard 
-            key={product.id} product={product} addToCart={addToCart} 
+            key={product.id} 
+            product={product} 
+            addToCart={addToCart} 
           />
         ))
       )}

@@ -48,7 +48,6 @@ const App = () => {
         addToCart={addToCart} 
       />
 
-      {message && <p style={{ color: 'lime', fontWeight: 'bold' }}>{message}</p>}
 
       <Cart cart={cart} />
     </div>

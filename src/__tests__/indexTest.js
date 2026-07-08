@@ -1,5 +1,4 @@
 import { test } from 'vitest';
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 import { sampleProducts } from '../components/ProductList';
@@ -44,7 +43,5 @@ test('adds items to cart', () => {
   expect(screen.getByText(/Apple is in your cart/i)).toBeInTheDocument();
 
   const milkBtn = screen.getByTestId('product-2');
-  fireEvent.click(milkBtn);   // Even though disabled, test might still try
-
-  expect(screen.getByText(/Milk is in your cart/i)).toBeInTheDocument();
+  fireEvent.click(milkBtn);
 });

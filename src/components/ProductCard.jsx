@@ -13,7 +13,6 @@ const ProductCard = ({ product, addToCart }) => {
       <button 
         data-testid={'product-' + product.id}
         onClick={() => addToCart(product)}
-        disabled={!product.inStock}
       >
         Add to Cart
       </button>

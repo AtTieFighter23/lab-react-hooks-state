@@ -66,3 +66,32 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Dark Mode Support */
+.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark p,
+.dark label,
+.dark li {
+  color: #ffffff;
+}
+
+.dark button {
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
+}
+
+.dark button:hover {
+  border-color: #646cff;
+}
+
+.dark .read-the-docs {
+  color: #aaa;
+}

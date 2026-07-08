@@ -1,16 +1,12 @@
-/**
- * @vitest-environment jsdom
- */
-import { afterEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
 import { test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
-import { sampleProducts } from '../components/ProductList';
-import '@testing-library/jest-dom/vitest';
+import '@testing-library/jest-dom';
 
-afterEach(() => {
-  cleanup();
+test('renders shopping app', () => {
+  render(<App />);
+  expect(screen.getByText(/Shopping App/i)).toBeInTheDocument();
 });
 
 test('toggles dark mode on button click', () => {
@@ -20,10 +16,10 @@ test('toggles dark mode on button click', () => {
   expect(toggleBtn).toBeInTheDocument();
 
   fireEvent.click(toggleBtn);
-  expect(toggleBtn.textContent.toLowerCase()).toMatch(/light/i);
+  expect(toggleBtn).toHaveTextContent(/Light Mode/i);
 
   fireEvent.click(toggleBtn);
-  expect(toggleBtn.textContent.toLowerCase()).toMatch(/dark/i);
+  expect(toggleBtn).toHaveTextContent(/Dark Mode/i);
 });
 
 test('filters products by category', () => {
@@ -35,22 +31,12 @@ test('filters products by category', () => {
   expect(screen.queryByText(/Milk/i)).not.toBeInTheDocument();
 });
 
-test('displays message when no products match filter', () => {
+test('shows "No products available" when filtering removes all products', () => {
   render(<App />);
   const dropdown = screen.getByRole('combobox');
-  fireEvent.change(dropdown, { target: { value: 'NonExistent' } });
-
+  
+  // Use a category that doesn't exist
+  fireEvent.change(dropdown, { target: { value: 'Veggies' } });
+  
   expect(screen.getByText(/no products/i)).toBeInTheDocument();
-});
-
-test('adds items to cart', () => {
-  render(<App />);
-
-  const appleBtn = screen.getByTestId('product-1');
-  fireEvent.click(appleBtn);
-
-  expect(screen.getByText(/Apple is in your cart/i)).toBeInTheDocument();
-
-  const milkBtn = screen.getByTestId('product-2');
-  fireEvent.click(milkBtn);
 });

@@ -16,7 +16,7 @@ const ProductList = ({ selectedCategory, addToCart }) => {
       <h2>Available Products</h2>
       
       {filteredProducts.length === 0 ? (
-        <p>No products found in this category.</p>
+        <p>No products available</p>
       ) : (
         filteredProducts.map((product) => (
           <ProductCard 

@@ -6,8 +6,8 @@ import Cart from './components/Cart';
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [cart, setCart] = useState([]);           
-  const [message, setMessage] = useState('');     
+  const [cart, setCart] = useState([]);              
+  const [message, setMessage] = useState('');
 
   const toggleDarkMode = () => {
     setIsDarkMode(prev => !prev);
@@ -21,7 +21,7 @@ const App = () => {
     setCart(prev => [...prev, product]);
     
     setMessage(`${product.name} is in your cart.`);
-    setTimeout(() => setMessage(''), 10);
+    setTimeout(() => setMessage(''), 2000);
   };
 
   return (

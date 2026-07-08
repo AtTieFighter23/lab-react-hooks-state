@@ -1,8 +1,17 @@
-import { test } from 'vitest';
+/**
+ * @vitest-environment jsdom
+ */
+import { afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 import { sampleProducts } from '../components/ProductList';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
+
+afterEach(() => {
+  cleanup();
+});
 
 test('toggles dark mode on button click', () => {
   render(<App />);

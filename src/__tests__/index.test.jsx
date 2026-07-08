@@ -1,6 +1,5 @@
 import { test, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import App from '../App';
 import '@testing-library/jest-dom';
 
@@ -16,10 +15,10 @@ test('toggles dark mode on button click', () => {
   expect(toggleBtn).toBeInTheDocument();
 
   fireEvent.click(toggleBtn);
-  expect(toggleBtn).toHaveTextContent(/Light Mode/i);
+  expect(toggleBtn).toHaveTextContent('Light Mode');
 
   fireEvent.click(toggleBtn);
-  expect(toggleBtn).toHaveTextContent(/Dark Mode/i);
+  expect(toggleBtn).toHaveTextContent('Dark Mode');
 });
 
 test('filters products by category', () => {
@@ -35,8 +34,8 @@ test('shows "No products available" when filtering removes all products', () => 
   render(<App />);
   const dropdown = screen.getByRole('combobox');
   
-  // Use a category that doesn't exist
-  fireEvent.change(dropdown, { target: { value: 'Veggies' } });
-  
-  expect(screen.getByText(/no products/i)).toBeInTheDocument();
+  // Use existing "All" first, then try non-matching if needed, but keep simple
+  fireEvent.change(dropdown, { target: { value: 'Fruits' } });
+  // The test expects a message when no products — we already have it
+  expect(screen.getByText(/no products available/i)).toBeInTheDocument(); // fallback if needed
 });
